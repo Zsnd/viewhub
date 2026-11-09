@@ -1,0 +1,5 @@
+{
+  "channels": [
+    {"id":"entrance","name":"入口","stream":"entrance","timezone":"Asia/Shanghai","onvif":{"device":"http://192.168.1.64/onvif/device_service","username":"sitecam","password":"replace","recording":"RecordingToken","track":"VideoTrackToken","profile":"MediaProfileToken","ptz":true},"hikvision":{"origin":"http://192.168.1.64","username":"sitecam","password":"replace","track":101}}
+  ]
+}

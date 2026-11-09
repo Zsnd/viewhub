@@ -1,0 +1,51 @@
+services:
+  cloud:
+    image: viewhub-cloud:0.4.2
+    build:
+      context: .
+      target: cloud
+    restart: unless-stopped
+    environment:
+      PUBLIC_IP: ${PUBLIC_IP:-127.0.0.1}
+      SIP_PORT: ${SIP_PORT:-5060}
+      SIP_ID: ${SIP_ID:-34020000002000000002}
+      SIP_REALM: ${SIP_REALM:-3402000000}
+      RTP_FIRST: ${RTP_FIRST:-10000}
+      RTP_LAST: ${RTP_LAST:-10099}
+      ICE_PORT: ${ICE_PORT:-8191}
+      WEB_USER: ${WEB_USER:-admin}
+      WEB_SECRET_FILE: /secrets/web.password
+      COOKIE_SECURE: ${COOKIE_SECURE:-true}
+      VIEWHUB_PUBLIC_ORIGIN: ${VIEWHUB_PUBLIC_ORIGIN:-https://viewhub.xliyun.com}
+      VIEWHUB_PROVISION_DIR: /provision
+      VIEWHUB_RELEASE_DIR: /release
+      VIEWHUB_MQTT_URL: mqtt://broker:1883
+      VIEWHUB_MQTT_USER: cloud
+      VIEWHUB_MQTT_PASSWORD: ${VIEWHUB_MQTT_CLOUD_PASSWORD:?configure cloud broker password}
+    ports:
+      - "127.0.0.1:18481:8080"
+      - "${SIP_PORT:-5060}:${SIP_PORT:-5060}/udp"
+      - "${SIP_PORT:-5060}:${SIP_PORT:-5060}/tcp"
+      - "${RTP_FIRST:-10000}-${RTP_LAST:-10099}:${RTP_FIRST:-10000}-${RTP_LAST:-10099}/udp"
+      - "${ICE_PORT:-8191}:${ICE_PORT:-8191}/udp"
+    volumes:
+      - cloud-data:/data
+      - provision:/provision
+      - ./secrets:/secrets:ro
+    depends_on:
+      - broker
+  broker:
+    image: eclipse-mosquitto:2.0
+    entrypoint: ["/bin/sh", "/viewhub-input/broker-start.sh"]
+    restart: unless-stopped
+    volumes:
+      - ./deploy/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ./deploy/mosquitto.acl:/viewhub-input/acl:ro
+      - ./deploy/broker-start.sh:/viewhub-input/broker-start.sh:ro
+      - ./secrets/mosquitto.passwd:/viewhub-input/passwords:ro
+      - provision:/provision:ro
+    ports:
+      - "127.0.0.1:18482:9001"
+volumes:
+  cloud-data:
+  provision:

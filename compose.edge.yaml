@@ -1,0 +1,37 @@
+services:
+  edge:
+    image: viewhub-edge:0.4.2
+    build:
+      context: .
+      target: edge
+    restart: unless-stopped
+    environment:
+      VIEWHUB_ID: ${VIEWHUB_ID:-main}
+      VIEWHUB_EDGE_TOKEN: ${VIEWHUB_EDGE_TOKEN:?configure edge token}
+      VIEWHUB_MQTT_URL: ${VIEWHUB_MQTT_URL:-wss://viewhub.xliyun.com/mqtt}
+      VIEWHUB_MQTT_USER: ${VIEWHUB_ID:-main}
+      VIEWHUB_MQTT_PASSWORD: ${VIEWHUB_MQTT_EDGE_PASSWORD:?configure edge broker password}
+      VIEWHUB_MEDIA_URL: ${VIEWHUB_MEDIA_URL:-wss://viewhub.xliyun.com/edge/media/main}
+      VIEWHUB_REPLAY_ICE_PORT: "18558"
+      VIEWHUB_REPLAY_ICE_IP: ${VIEWHUB_REPLAY_ICE_IP:-}
+      VIEWHUB_ONVIF_STATE: /var/lib/viewhub/recorders.json
+      VIEWHUB_ONVIF_LAN: ${VIEWHUB_ONVIF_LAN:-}
+      VIEWHUB_FRIGATE: ${VIEWHUB_FRIGATE:-}
+    volumes:
+      - recorder-data:/var/lib/viewhub
+      - ./deploy/channels.local.json:/config/channels.json:ro
+    ports:
+      - "18558:18558/udp"
+    depends_on:
+      - go2rtc
+  go2rtc:
+    image: alexxit/go2rtc:1.9.15
+    restart: unless-stopped
+    volumes:
+      - ./deploy/go2rtc.local.yaml:/config/go2rtc.yaml:ro
+    ports:
+      - "18556:18556/tcp"
+      - "18556:18556/udp"
+
+volumes:
+  recorder-data:

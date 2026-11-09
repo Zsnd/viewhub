@@ -1,0 +1,8 @@
+.git
+.env*
+secrets
+deploy/*.local.*
+.taste-skill
+web/node_modules
+web/dist
+data

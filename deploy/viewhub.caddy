@@ -1,0 +1,5 @@
+viewhub.xliyun.com {
+    @mqtt path /mqtt
+    reverse_proxy @mqtt 127.0.0.1:18482
+    reverse_proxy 127.0.0.1:18481
+}
