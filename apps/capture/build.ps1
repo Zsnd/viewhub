@@ -25,6 +25,8 @@ try {
 } finally { Pop-Location }
 New-Item -ItemType Directory -Force (Join-Path $OutputDirectory 'web') | Out-Null
 Copy-Item (Join-Path $PSScriptRoot 'web\dist\*') (Join-Path $OutputDirectory 'web') -Recurse -Force
+Copy-Item (Join-Path $projectRoot 'LICENSE') $OutputDirectory -Force
+Copy-Item (Join-Path $projectRoot 'licenses') $OutputDirectory -Recurse -Force
 $launcher = '@echo off' + "`r`n" + 'cd /d "%~dp0"' + "`r`n" + 'viewhub-capture.exe -web "%~dp0web"' + "`r`n" + 'pause' + "`r`n"
 [IO.File]::WriteAllText((Join-Path $OutputDirectory 'start.cmd'), $launcher)
 Write-Output "已构建到 $OutputDirectory，运行 start.cmd，打开 http://127.0.0.1:18491。"

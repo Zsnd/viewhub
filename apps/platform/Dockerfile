@@ -15,5 +15,7 @@ RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /viewhub ./apps/platfor
 FROM debian:bookworm-slim AS cloud
 COPY --from=build /viewhub /viewhub
 COPY --from=web /build/dist /web
+COPY LICENSE /usr/share/licenses/viewhub/LICENSE
+COPY licenses /usr/share/licenses/viewhub/third-party
 ENV WEB_ROOT=/web DB_PATH=/data/viewhub.db
 ENTRYPOINT ["/viewhub"]

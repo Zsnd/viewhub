@@ -8,4 +8,5 @@ apps/platform/deploy/*.local.*
 **/node_modules/
 **/dist/
 .vite/
+**/__pycache__/
 data/

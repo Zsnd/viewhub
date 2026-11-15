@@ -1,0 +1,24 @@
+{
+  "npm @napi-rs/wasm-runtime@1.2.2": {
+    "file": "upstream/napi-rs-wasm-runtime.txt",
+    "url": "https://raw.githubusercontent.com/napi-rs/napi-rs/5b344c367eeed81d1917f7c4d8e65b1adc16de12/LICENSE"
+  },
+  "npm @rolldown/binding-win32-x64-msvc@1.2.16": {
+    "file": "upstream/rolldown.txt",
+    "url": "https://raw.githubusercontent.com/rolldown/rolldown/v1.2.16/LICENSE"
+  },
+  "npm @tailwindcss/oxide-wasm32-wasi@4.3.5": {
+    "file": "upstream/tailwindcss.txt",
+    "url": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/v4.3.5/LICENSE"
+  },
+  "npm @tybys/wasm-util@0.10.3": {
+    "file": "upstream/wasm-util.txt",
+    "url": "https://api.github.com/repos/toyobayashi/wasm-util/git/blobs/772a335c052c7df8835f91bf47bb1e2845ba201e",
+    "note": "Package declares MIT; preserved original current upstream MIT text because the npm tarball omitted it."
+  },
+  "npm react-remove-scroll-bar@2.3.8": {
+    "file": "upstream/react-remove-scroll-bar.txt",
+    "url": "https://api.github.com/repos/theKashey/react-remove-scroll-bar/git/blobs/7c08c3990396ecefd90f99ff5d9a34f26f5b5616",
+    "note": "Package declares MIT; preserved original current upstream MIT text because the npm tarball omitted it."
+  }
+}
