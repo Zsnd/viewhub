@@ -1,0 +1,31 @@
+services:
+  cloud:
+    image: viewhub-cloud:0.6.0
+    build:
+      context: ../..
+      dockerfile: apps/platform/Dockerfile
+      target: cloud
+    restart: unless-stopped
+    environment:
+      PUBLIC_IP: ${PUBLIC_IP:-127.0.0.1}
+      SIP_PORT: ${SIP_PORT:-5060}
+      SIP_ID: ${SIP_ID:-34020000002000000002}
+      SIP_REALM: ${SIP_REALM:-3402000000}
+      RTP_FIRST: ${RTP_FIRST:-10000}
+      RTP_LAST: ${RTP_LAST:-10099}
+      ICE_PORT: ${ICE_PORT:-8191}
+      WEB_USER: ${WEB_USER:-admin}
+      WEB_SECRET_FILE: /secrets/web.password
+      COOKIE_SECURE: ${COOKIE_SECURE:-true}
+    ports:
+      - "127.0.0.1:18481:8080"
+      - "${SIP_PORT:-5060}:${SIP_PORT:-5060}/udp"
+      - "${SIP_PORT:-5060}:${SIP_PORT:-5060}/tcp"
+      - "${RTP_FIRST:-10000}-${RTP_LAST:-10099}:${RTP_FIRST:-10000}-${RTP_LAST:-10099}/udp"
+      - "${RTP_FIRST:-10000}-${RTP_LAST:-10099}:${RTP_FIRST:-10000}-${RTP_LAST:-10099}/tcp"
+      - "${ICE_PORT:-8191}:${ICE_PORT:-8191}/udp"
+    volumes:
+      - cloud-data:/data
+      - ../../secrets:/secrets:ro
+volumes:
+  cloud-data:

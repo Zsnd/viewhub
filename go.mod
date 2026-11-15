@@ -4,12 +4,9 @@ go 1.27.1
 
 require (
 	github.com/bluenviron/gohlslib/v2 v2.4.7
-	github.com/bluenviron/gortsplib/v5 v5.6.7
 	github.com/bluenviron/mediacommon/v2 v2.9.7
-	github.com/eclipse/paho.golang v0.23.0
 	github.com/emiago/sipgo v1.7.2
 	github.com/gorilla/websocket v1.5.3
-	github.com/hashicorp/yamux v0.1.2
 	github.com/icholy/digest v1.2.0
 	github.com/pion/rtp v1.10.6
 	github.com/pion/webrtc/v4 v4.2.26
@@ -17,7 +14,6 @@ require (
 	golang.org/x/net v0.59.0
 	golang.org/x/time v0.14.0
 	modernc.org/sqlite v1.61.1
-	nhooyr.io/websocket v1.8.17
 )
 
 require (
@@ -28,6 +24,7 @@ require (
 	github.com/gobwas/httphead v0.1.0 // indirect
 	github.com/gobwas/pool v0.2.1 // indirect
 	github.com/gobwas/ws v1.3.2 // indirect
+	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/mattn/go-isatty v0.0.24 // indirect
 	github.com/ncruces/go-strftime v1.1.0 // indirect

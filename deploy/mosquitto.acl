@@ -1,6 +1,0 @@
-user cloud
-topic write viewhub/+/request
-topic read viewhub/+/reply
-
-pattern read viewhub/%u/request
-pattern write viewhub/%u/reply

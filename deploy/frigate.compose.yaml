@@ -1,9 +1,0 @@
-services:
-  edge:
-    networks:
-      default: {}
-      frigate: {}
-networks:
-  frigate:
-    external: true
-    name: frigate_default
