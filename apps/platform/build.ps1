@@ -26,4 +26,6 @@ try {
 } finally { Pop-Location }
 New-Item -ItemType Directory -Force (Join-Path $OutputDirectory 'web') | Out-Null
 Copy-Item (Join-Path $PSScriptRoot 'web/dist/*') (Join-Path $OutputDirectory 'web') -Recurse -Force
+Copy-Item (Join-Path $projectRoot 'LICENSE') $OutputDirectory -Force
+Copy-Item (Join-Path $projectRoot 'licenses') $OutputDirectory -Recurse -Force
 Write-Output "已构建到 $OutputDirectory；配置 WEB_ROOT 为该目录下的 web，按部署文档配置平台环境。"
